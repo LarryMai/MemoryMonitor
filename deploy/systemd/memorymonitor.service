@@ -1,0 +1,16 @@
+[Unit]
+Description=Memory & CPU Monitor API Server
+After=network.target
+
+[Service]
+Type=simple
+# change to the directory where you placed published files
+WorkingDirectory=/opt/memmon
+ExecStart=/opt/memmon/MemoryMonitor 1 --metrics 0.0.0.0:9095
+Restart=always
+RestartSec=2
+User=memmon
+Environment=DOTNET_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target

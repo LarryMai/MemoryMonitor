@@ -1,4 +1,6 @@
-# MemoryMonitor# README.md
+# MemoryMonitor
+
+![build](https://github.com/LarryMai/MemoryMonitor/actions/workflows/build.yml/badge.svg)
 
 ## Memory & CPU Monitor API Server (.NET 8)
 
@@ -85,4 +87,16 @@ Build & run:
  docker run --rm -p 9095:9095 memmon:latest
 ```
 
+## Linux service (systemd)
+Add this section to README.md:
+
+```bash
+./scripts/install-systemd.sh
+# or run the steps manually:
+# 1) dotnet publish -c Release -r linux-x64 -o /tmp/memmon --no-self-contained
+# 2) sudo mkdir -p /opt/memmon && sudo cp -r /tmp/memmon/* /opt/memmon/
+# 3) sudo useradd -r -s /usr/sbin/nologin memmon || true
+# 4) sudo cp deploy/systemd/memorymonitor.service /etc/systemd/system/
+# 5) sudo systemctl daemon-reload && sudo systemctl enable memorymonitor && sudo systemctl start memorymonitor
+```
 
